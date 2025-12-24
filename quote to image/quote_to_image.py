@@ -9,8 +9,8 @@ except ModuleNotFoundError:
     exit(1)
 
 # options (these are constants)
-csvpath = 'litclock_annotated_br2.csv'      # csv file to read quotes from
-imgdir = 'images/'                          # save location for images
+csvpath = 'litclock_annotated.csv'          # csv file to read quotes from
+imgdir = '../timelit/images/'               # save location for images
 imgformat = 'png'                           # format. jpeg is faster but lossy
 include_metadata = True                     # whether to include author/title
 imgsize = (600,800)                         # width/height of image
@@ -228,7 +228,7 @@ def main():
         if len(argv) > 1:
             if argv[1].isdigit() and int(argv[1]) < jobs:
                 jobs = int(argv[1])
-        quotereader = csv.DictReader(csvfile, delimiter='|')
+        quotereader = csv.DictReader(csvfile, delimiter='|', quoting=csv.QUOTE_NONE)
         for i, row in enumerate(quotereader):
             if i >= jobs:
                 break
